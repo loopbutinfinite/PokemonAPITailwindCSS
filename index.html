@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PokemonAPITailwind</title>
+  <link rel="stylesheet" href="./src/output.css">
+</head>
+
+<body class="bg-[#022b3a]">
+  <div id="drawer-navigation"
+    class="fixed top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white dark:bg-gray-800"
+    tabindex="-1" aria-labelledby="drawer-navigation-label">
+    <header id="drawer-navigation-label" class="font-semibold text-3xl text-gray-500 dark:text-gray-300">Favorites List
+    </header>
+    <button type="button" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation"
+      class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+      <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+          clip-rule="evenodd"></path>
+      </svg>
+    </button>
+    <div id="favoritedPokemon" class="py-4 overflow-y-auto text-white">
+    </div>
+  </div>
+  <main class="bg-[#1f7a8c] md:mx-15 mx-5" style="border-radius: 20px;">
+    <section class="place-items-center mt-15 grid grid-cols-3 pt-5">
+      <div>
+        <a id="openFavoritesButton" type="button" data-drawer-target="drawer-navigation"
+          data-drawer-show="drawer-navigation" aria-controls="drawer-navigation"><img style="width: 50px;height: 50px;"
+            src="./assets/pokeball-favorite-icon-filled.png" alt=""></a>
+        <p class="text-white text-center">Favorites</p>
+      </div>
+      <input id="pokemonInputSearch" type="text" placeholder="Enter Pokemon(Gen 1-5) Name or ID #" class="bg-[#D9D9D9]"
+        style="border-radius: 5px; width: 150%; height: 35px; border: 1px solid black;" id="">
+      <div>
+        <a>
+          <img id="pokemonInfoButton" style="width: 50px;height: 50px;"
+            src="./assets/pokeball-favorite-icon-colored.png" alt="">
+        </a>
+        <p class="text-white">Random</p>
+      </div>
+    </section>
+    <section class="place-items-center text-center text-white mt-9">
+      <div class="grid place-items-center grid-cols-2 gap-14">
+        <div class="grid place-items-center">
+          <a id="saveToLocalStorageButton"><img src="./assets/icon-check.png" alt="favorites button"
+              style="width: 35px; height: 35px;"></a>
+          <p>Save to Favorites</p>
+        </div>
+        <div class="grid place-items-center">
+          <a id="removeFromLocalStorageButton"><img src="./assets/icon-no-cross.png" alt="remove from favorites button"
+              style="width: 35px; height: 35px;"></a>
+          <p>Remove from Favorite</p>
+        </div>
+      </div>
+      <p id="pokemonNameText" class="md:text-7xl text-5xl">Dragonite</p>
+      <p id="pokemonIDText" class="md:text-4xl text-3xl">#</p>
+    </section>
+    <section class="grid md:grid-cols-2 md:grid-rows-1 grid-cols-1 grid-rows-2 place-items-center mt-2">
+      <div>
+        <img id="pokemonSpriteImg" style="width: 300px; height: 300px;" alt="Default Form">
+        <p class="text-center text-2xl text-white">Default Form</p>
+      </div>
+      <div>
+        <img id="pokemonShinySpriteImg" style="width: 300px; height: 300px;" alt="Shiny Form">
+        <p class="text-center text-2xl text-white"> Shiny Form</p>
+      </div>
+    </section>
+    <article class="mt-10 py-3 text-3xl text-center text-black bg-[#e1e5f2] mx-auto px-5"
+      style="border-radius: 10px; width: fit-content;">
+      <p class="text-2xl">Pokemon's Evolution Path:</p>
+      <p class="text-xl" id="pokemonEvolutionPathText">path here</p>
+    </article>
+    <section class="place-items-center grid md:grid-cols-3 md:grid-rows-1 grid-cols-1 grid-rows-3 mt-8 mb-15 sm:mb-5">
+      <img id="pokemonFirstEvoImg" style="width: 150px; height: 150px;" alt="Pokemon First Evolution Image">
+      <img id="pokemonSecondEvoImg" style="width: 150px; height: 150px;" alt="Pokemon Second Evolution Image">
+      <img id="pokemonThirdEvoImg" style="width: 150px; height: 150px;" alt="Pokemon Third Evolution Image">
+    </section>
+    <section
+      class="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 mt-10 lg:pb-10 pb-5 place-items-center mx-5 mb-15 md:gap-5">
+      <article
+        class="block h-full w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-[#bfdbf7] dark:border-gray-700 md:mt-5 lg:mb-5 mb-15 sm:mb-0">
+        <p class="text-black underline" style="font-size: 25px;">Pokemon's Types:</p>
+        <p id="pokemonTypeText" class="font-normal text-gray-900 dark:text-gray-900" style="height: 200px;">All of the
+          Pokemon's types will be displayed here.</p>
+      </article>
+      <article
+        class="block h-full w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-[#bfdbf7] dark:border-gray-700 lg:mt-0 mt-5 mb-15 sm:mb-0">
+        <p class="text-black underline" style="font-size: 25px;">Pokemon's Abilities:</p>
+        <p id="pokemonAbilitiesText" class="font-normal text-gray-900 dark:text-gray-900" style="height: 200px;">All of
+          the Pokemon's abilities will be displayed here.</p>
+      </article>
+      <article
+        class="block h-full w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-[#bfdbf7] dark:border-gray-700 lg:mt-0 mt-5 mb-10 sm:mb-0">
+        <p class="text-black underline" style="font-size: 25px;">Pokemon's Location:</p>
+        <p id="pokemonLocationText" class="font-normal text-gray-700 dark:text-gray-900" style="height: 200px;">The
+          location of where this Pokemon can be found will be displayed here.</p>
+      </article>
+      <article
+        class="block h-full w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-[#bfdbf7] dark:border-gray-700 overflow-y-scroll lg:mt-0 mt-5 mb-5 md:mb-0 sm:mb-0">
+        <p class="text-black underline" style="font-size: 25px;">Pokemon's Moves:</p>
+        <p id="pokemonMovesText" class="font-normal text-gray-700 dark:text-gray-900" style="height: 200px;">All of the
+          Pokemon's moves will be displayed here.</p>
+      </article>
+    </section>
+  </main>
+  <script type="module" src="./scripts/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+</body>
+
+</html>
